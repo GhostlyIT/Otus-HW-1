@@ -1,20 +1,16 @@
 package sunsetcode;
 
-import static org.junit.Assert.assertTrue;
-
+import org.junit.Assert;
 import org.junit.Test;
+import java.util.ArrayList;
 
-/**
- * Unit test for simple App.
- */
 public class AppTest 
 {
-    /**
-     * Rigorous Test :-)
-     */
     @Test
-    public void shouldAnswerWithTrue()
+    public void testEmptyResult()
     {
-        assertTrue( true );
+        ArrayList<Double> result = App.solve(1, 0, 1);
+
+        Assert.assertEquals(result, new ArrayList<Double>());
     }
 }
