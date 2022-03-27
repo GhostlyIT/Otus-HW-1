@@ -13,4 +13,15 @@ public class AppTest
 
         Assert.assertEquals(result, new ArrayList<Double>());
     }
+
+    @Test
+    public void testResultWithTwoRoots()
+    {
+        ArrayList<Double> result = App.solve(1, 0, -1);
+        ArrayList<Double> expectedResult = new ArrayList<>();
+        expectedResult.add(-1.);
+        expectedResult.add(1.);
+
+        Assert.assertEquals(result, expectedResult);
+    }
 }
