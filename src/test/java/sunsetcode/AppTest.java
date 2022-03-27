@@ -12,7 +12,7 @@ public class AppTest
     {
         ArrayList<Double> result = null;
         try {
-            result = App.solve(1d, 0d, 1d);
+            result = App.solve(1, 0, 1);
         } catch (CoefficientZeroException e) {
             e.printStackTrace();
         }
@@ -21,25 +21,21 @@ public class AppTest
     }
 
     @Test
-    public void testResultWithTwoRoots()
+    public void testResultWithTwoRootsTimesToOne()
     {
-        ArrayList<Double> result = null;
         try {
-            result = App.solve(1d, 0d, -1d);
+            ArrayList<Double> result = App.solve(1, 0, -1);
+            for (Double root : result) {
+                Assert.assertEquals(0, root % 1, App.EPSILON);
+            }
         } catch (CoefficientZeroException e) {
             e.printStackTrace();
         }
-
-        ArrayList<Double> expectedResult = new ArrayList<>();
-        expectedResult.add(-1d);
-        expectedResult.add(1d);
-
-        Assert.assertEquals(result, expectedResult);
     }
 
     @Test(expected = CoefficientZeroException.class)
     public void testFirstCoefficientCantBeZero() throws CoefficientZeroException {
-        App.solve(0d, 1d, 1d);
+        App.solve(0, 1, 1);
     }
 
 
