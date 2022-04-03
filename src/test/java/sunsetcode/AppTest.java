@@ -33,6 +33,20 @@ public class AppTest
         }
     }
 
+    @Test
+    public void testResultWithRootsTimesToTwo()
+    {
+        ArrayList<Double> expectedResult = new ArrayList<>();
+        expectedResult.add(-1d);
+
+        try {
+            ArrayList<Double> result = App.solve(1, 2, 1);
+            Assert.assertEquals(expectedResult, result);
+        } catch (CoefficientZeroException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test(expected = CoefficientZeroException.class)
     public void testFirstCoefficientCantBeZero() throws CoefficientZeroException {
         App.solve(0, 1, 1);
