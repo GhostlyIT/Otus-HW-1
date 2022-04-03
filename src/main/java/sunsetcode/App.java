@@ -1,6 +1,7 @@
 package sunsetcode;
 
 import sunsetcode.Exceptions.CoefficientZeroException;
+import sunsetcode.Exceptions.DoubleIsNaNException;
 
 import java.util.ArrayList;
 
@@ -8,14 +9,23 @@ public class App
 {
     public static double EPSILON = 0.000001d;
 
-    public static ArrayList<Double> solve(double a, double b, double c) throws CoefficientZeroException
+    public static ArrayList<Double> solve(double a, double b, double c) throws CoefficientZeroException, DoubleIsNaNException
     {
+        double[] parameters = {a, b ,c};
+
+        for (double parameter : parameters) {
+            if (Double.isNaN(parameter)) {
+                throw new DoubleIsNaNException();
+            }
+        }
+
         if (compareDoubles(a, 0)) {
             throw new CoefficientZeroException();
         }
 
         ArrayList<Double> result = new ArrayList<>();
         double discriminant = b * b - 4 * a * c;
+        System.out.println(discriminant);
 
         if (discriminant > 0) {
             double x1 = (-b - Math.sqrt(discriminant)) / 2 * a;

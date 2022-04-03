@@ -3,6 +3,7 @@ package sunsetcode;
 import org.junit.Assert;
 import org.junit.Test;
 import sunsetcode.Exceptions.CoefficientZeroException;
+import sunsetcode.Exceptions.DoubleIsNaNException;
 import java.util.ArrayList;
 
 public class AppTest 
@@ -13,7 +14,7 @@ public class AppTest
         ArrayList<Double> result = null;
         try {
             result = App.solve(1, 0, 1);
-        } catch (CoefficientZeroException e) {
+        } catch (CoefficientZeroException|DoubleIsNaNException e) {
             e.printStackTrace();
         }
 
@@ -28,7 +29,7 @@ public class AppTest
             for (Double root : result) {
                 Assert.assertEquals(0, root % 1, App.EPSILON);
             }
-        } catch (CoefficientZeroException e) {
+        } catch (CoefficientZeroException|DoubleIsNaNException e) {
             e.printStackTrace();
         }
     }
@@ -42,15 +43,19 @@ public class AppTest
         try {
             ArrayList<Double> result = App.solve(1, 2, 1);
             Assert.assertEquals(expectedResult, result);
-        } catch (CoefficientZeroException e) {
+        } catch (CoefficientZeroException|DoubleIsNaNException e) {
             e.printStackTrace();
         }
     }
 
     @Test(expected = CoefficientZeroException.class)
-    public void testFirstCoefficientCantBeZero() throws CoefficientZeroException {
+    public void testFirstCoefficientCantBeZero() throws CoefficientZeroException, DoubleIsNaNException {
         App.solve(0, 1, 1);
     }
 
-
+    @Test(expected = DoubleIsNaNException.class)
+    public void testIfMethodRejectsParametersThatAreNotNumbers() throws CoefficientZeroException, DoubleIsNaNException {
+        double NaN = 55.0*0.0/0.0;
+        App.solve(1, 1, NaN);
+    }
 }
