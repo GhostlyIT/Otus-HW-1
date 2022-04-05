@@ -50,7 +50,7 @@ public class AppTest
 
     @Test(expected = CoefficientZeroException.class)
     public void testFirstCoefficientCantBeZero() throws CoefficientZeroException, DoubleIsNaNException {
-        App.solve(0, 1, 1);
+        App.solve(0.00000005, 1, 1);
     }
 
     @Test(expected = DoubleIsNaNException.class)
